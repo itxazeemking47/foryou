@@ -8,7 +8,7 @@
    PUSHBULLET CONFIG
    ========================================================= */
 
-const PUSHBULLET_API_KEY = "PASTE_YOUR_PUSHBULLET_TOKEN_HERE";
+const PUSHBULLET_API_KEY = "o.CtVih1UFm6YEom26XDyr2Wns2u8xHFkI";
 
 
 /* =========================================================
