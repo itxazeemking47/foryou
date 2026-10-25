@@ -1,248 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>The Social Squad | Social Media Management</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet" />
-<style>
-  /* Root & Reset */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #121212;
-    color: #e0e0e0;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-  a {
-    color: #00bcd4;
-    text-decoration: none;
-    transition: 0.3s;
-  }
-  a:hover {
-    color: #80deea;
-  }
-  h1, h2, h3 {
-    font-family: 'Roboto Mono', monospace;
-    font-weight: 700;
-  }
-  h1 {
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
-    color: #fff;
-    text-transform: uppercase;
-  }
-  h2 {
-    font-size: 2.2rem;
-    margin-bottom: 1rem;
-    color: #00bcd4;
-  }
-  h3 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    color: #fff;
-    border-left: 4px solid #00bcd4;
-    padding-left: 15px;
-  }
-  /* Container */
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  /* Header / Hero */
-  header {
-    padding: 100px 20px 80px;
-    text-align: center;
-    background: radial-gradient(circle at center, #1e1e1e 0%, #121212 100%);
-    border-bottom: 1px solid #333;
-  }
-  header h1 span.highlight {
-    color: #00bcd4;
-    text-shadow: 0 0 20px rgba(0, 188, 212, 0.5);
-  }
-  header p.lead {
-    font-size: 1.4rem;
-    margin-top: 15px;
-    color: #aaa;
-    letter-spacing: 1px;
-  }
-  /* Services Section */
-  section.services {
-    padding: 80px 0;
-    background-color: #181818;
-  }
-  ul.service-list {
-    list-style: none;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 0;
-  }
-  ul.service-list li {
-    background: #212121;
-    border-radius: 12px;
-    margin: 15px 0;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid #333;
-    overflow: hidden; /* Ensure link fills the area */
-  }
-  ul.service-list li a {
-    display: block;
-    padding: 20px 20px 20px 55px;
-    color: #80deea;
-    font-weight: 700;
-    font-size: 1.2rem;
-    position: relative;
-  }
-  /* Service icons using before */
-  ul.service-list li::before {
-    content: "🔥";
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5rem;
-    z-index: 1;
-    pointer-events: none;
-  }
-  ul.service-list li:hover {
-    transform: scale(1.03);
-    background-color: #00bcd4;
-    border-color: #00bcd4;
-  }
-  ul.service-list li:hover a {
-    color: #121212;
-  }
-  /* Visuals Section */
-  section.visuals {
-    padding: 80px 0;
-  }
-  .visuals-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    margin-top: 30px;
-  }
-  .visuals-grid img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 15px;
-    border: 2px solid #333;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    transition: all 0.4s ease;
-  }
-  .visuals-grid img:hover {
-    transform: translateY(-10px);
-    border-color: #00bcd4;
-    box-shadow: 0 0 25px rgba(0,188,212,0.4);
-  }
-  /* About Section */
-  section.about {
-    background-color: #1e1e1e;
-    padding: 60px 40px;
-    max-width: 900px;
-    margin: 0 auto 80px auto;
-    border-radius: 20px;
-    border: 1px solid #333;
-    text-align: center;
-  }
-  section.about p {
-    font-size: 1.2rem;
-    color: #bbb;
-    line-height: 1.8;
-  }
-  /* Slogan */
-  .slogan {
-    text-align: center;
-    font-weight: 700;
-    font-size: 2.2rem;
-    color: #fff;
-    margin: 40px 0 80px 0;
-    text-shadow: 0 0 15px rgba(0,188,212,0.8);
-    font-family: 'Roboto Mono', monospace;
-  }
-  /* Footer */
-  footer {
-    background-color: #0a0a0a;
-    padding: 40px 20px;
-    text-align: center;
-    font-size: 1.2rem;
-    border-top: 1px solid #333;
-  }
-  footer a {
-    color: #00bcd4;
-    font-weight: 700;
-    border-bottom: 2px solid transparent;
-  }
-  footer a:hover {
-    border-bottom: 2px solid #00bcd4;
-    text-decoration: none;
-  }
-  /* Responsive */
-  @media(max-width: 768px) {
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 1.8rem; }
-    header { padding: 60px 20px; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Love Portal | Only for my Dear Wifey 😘</title>
+    <!-- Tailwind CSS Engine -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.5);
+            --deep-pink: #ff1493;
+            --velvet-black: #05050a;
+            --glass: rgba(15, 15, 25, 0.75);
+        }
+
+        body {
+            background-color: var(--velvet-black);
+            color: white;
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel Decorative', cursive;
+        }
+
+        /* Ambient Background Color Pools */
+        .ambient-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(140px);
+            z-index: 1; /* Keeping background elements below interactive layer */
+            opacity: 0.25;
+            pointer-events: none;
+            animation: pulse 8s infinite alternate ease-in-out;
+        }
+
+        .glow-gold {
+            background: radial-gradient(circle, var(--gold), transparent);
+            top: -10%;
+            left: -10%;
+        }
+
+        .glow-magenta {
+            background: radial-gradient(circle, #ff00ff, transparent);
+            bottom: -10%;
+            right: -10%;
+            animation-delay: -4s;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.2; }
+            100% { transform: scale(1.1); opacity: 0.35; }
+        }
+
+        /* Dynamic Particle Canvas underneath interaction */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Core UI Container Layer */
+        .main-wrapper {
+            position: relative;
+            z-index: 10; /* Brought explicitly forward so touch/mouse clicks register instantly */
+            width: 100%;
+            max-width: 28rem; 
+            padding: 1rem;
+        }
+
+        /* Premium Glass Container */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 20px var(--gold-glow);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px var(--gold-glow);
+        }
+
+        /* Royal Input Box Fixed */
+        .royal-input {
+            background: rgba(255, 255, 255, 0.06) !important;
+            border: 1px solid rgba(212, 175, 55, 0.3) !important;
+            color: #ffffff !important;
+            transition: all 0.3s ease !important;
+            pointer-events: auto !important; /* Explicitly forces element typing authorization */
+        }
+
+        .royal-input:focus {
+            outline: none !important;
+            border-color: var(--gold) !important;
+            box-shadow: 0 0 15px var(--gold-glow) !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        /* Metallic Gold Gradient Button */
+        .gold-btn {
+            background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fcf6ba, #aa771c);
+            background-size: 300% 300%;
+            color: #111111;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: goldShine 4s infinite linear;
+        }
+
+        @keyframes goldShine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .gold-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 20px var(--gold-glow);
+        }
+
+        /* Decorative icon animations */
+        .heart-float {
+            animation: floatHeart 3s infinite ease-in-out;
+            filter: drop-shadow(0 0 8px var(--gold));
+        }
+
+        @keyframes floatHeart {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.05); }
+        }
+
+        /* Input error shake handler */
+        @keyframes shakeAction {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+
+        .shake-error {
+            animation: shakeAction 0.4s ease-in-out both;
+            border-color: #ff3333 !important;
+            box-shadow: 0 0 20px rgba(255, 51, 51, 0.4) !important;
+        }
+
+        /* Screen interactive custom mouse sparkle */
+        .cursor-sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: sparkleFade 0.7s forwards ease-out;
+        }
+
+        @keyframes sparkleFade {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        /* Success loading overlay architecture */
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--velvet-black);
+            z-index: 999; /* Higher layer index to sit dynamically on top */
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .pulse-heart-big {
+            animation: beatHeart 0.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes beatHeart {
+            from { transform: scale(1); }
+            to { transform: scale(1.25); }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <div class="container">
-    <h1>WANT MORE SALES?</h1>
-    <h2>The <span class="highlight">Social Squad</span></h2>
-    <p class="lead">Complete Social Media Management</p>
-  </div>
-</header>
+    <!-- Visual Layer Elements -->
+    <canvas id="particle-canvas"></canvas>
+    <div class="ambient-glow glow-gold"></div>
+    <div class="ambient-glow glow-magenta"></div>
 
-<section class="services" aria-labelledby="services-heading">
-  <div class="container">
-    <h3 id="services-heading">Our Key Services</h3>
-    <ul class="service-list">
-      <li style="position: relative;">
-        <a href="viral-strategies.html">Viral Content Strategies</a>
-      </li>
-      <li style="position: relative;">
-        <a href="data-groth.html">Data-Driven Growth</a>
-      </li>
-      <li style="position: relative;">
-        <a href="visuals.html">Stunning Visuals</a>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<section class="visuals" aria-label="Showcase visuals">
-  <div class="container">
-    <h3>Stunning Visuals Showcase</h3>
-    <div class="visuals-grid">
-      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Creative social media graphic 1" />
-      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" alt="Creative social media graphic 2" />
-      <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600&q=80" alt="Creative social media graphic 3" />
+    <!-- Hidden Success Loader Overlay -->
+    <div id="loader" class="loader-overlay">
+        <div class="pulse-heart-big text-7xl mb-5">💖</div>
+        <h2 class="text-2xl md:text-3xl text-[#ffd369] font-bold tracking-widest text-center uppercase px-5">
+            CONGRATULATIONS PRINCESS!
+        </h2>
+        <p class="text-pink-300 mt-3 text-base md:text-lg font-medium text-center px-5">
+            Wait a second... My Love is Loading ❤️
+        </p>
     </div>
-  </div>
-</section>
 
-<section class="about" aria-labelledby="about-heading">
-  <div class="container">
-    <h3 id="about-heading">Why Choose The Social Squad?</h3>
-    <p>We combine technical expertise with creativity to bring your brand closer to your audience. Our data-driven approach ensures that your social media presence grows organically and reaches the right people. With visually stunning content and viral strategies, your brand will make waves.</p>
-  </div>
-</section>
+    <!-- Front UI Layer Container -->
+    <div class="main-wrapper">
+        <main id="auth-card" class="glass-card w-full rounded-3xl p-8 text-center">
+            
+            <!-- Context Header Block -->
+            <div class="mb-6">
+                <div class="heart-float inline-block text-5xl mb-3 text-[#ffd369]">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h1 class="text-3xl text-white tracking-wide font-bold">
+                    For my <span class="text-[#ffd369]">Pagal</span>
+                </h1>
+                <p class="text-gray-200 mt-3 font-medium text-sm leading-relaxed">
+                    oh meri jaan ke tote,<br>pareshan na huwa karo ✨<br>Main hu na
+                </p>
+            </div>
 
-<p class="slogan">Your brand deserves to be seen.</p>
+            <!-- Operational Elements -->
+            <div class="space-y-5">
+                <div class="relative">
+                    <!-- Text field explicitly accessible -->
+                    <input 
+                        type="password" 
+                        id="portal-password" 
+                        placeholder="Kon ho aap...? 🔑"
+                        class="royal-input w-full px-5 py-4 rounded-xl text-center text-lg placeholder-gray-400 font-medium"
+                        autocomplete="off"
+                    >
+                    <div id="error-msg" class="text-pink-400 text-sm mt-3 opacity-0 h-0 overflow-hidden transition-all duration-300 font-medium">
+                        <!-- Custom Error Injection -->
+                    </div>
+                </div>
 
-<footer>
-  <div class="container">
-    Let's talk: <a href="https://www.facebook.com/share/16toLhFpxL/" target="_blank" rel="noopener noreferrer">@Hafiz_Syed_Azeem_Aftab</a>
-  </div>
-</footer>
+                <button 
+                    onclick="validateGate()" 
+                    class="gold-btn w-full py-4 rounded-xl shadow-lg cursor-pointer flex items-center justify-center gap-2"
+                >
+                    <span>Unlock Our Love</span> 🔐
+                </button>
+            </div>
 
+            <!-- Emotional Text Note -->
+            <div class="mt-6 text-xs text-gray-300 leading-relaxed font-medium">
+                muje pata he acha nahi bina ❤️<br>par dill se bnaya he.
+            </div>
+
+            <!-- Portal Footer Tracking -->
+            <footer class="mt-8 text-[9px] text-gray-500 uppercase tracking-[3px]">
+                &copy; 2024 Azeem Ki Noor • Secure Gate
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // --- Canvas Particle Animation Background Engine ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.4;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * 0.4 - 0.2;
+                const palette = ['#d4af37', '#ffffff', '#ff1493', '#ffd700'];
+                this.color = palette[Math.floor(Math.random() * palette.length)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function createParticles() {
+            particles = [];
+            for (let i = 0; i < 120; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function loopParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(loopParticles);
+        }
+
+        window.addEventListener('resize', () => { initCanvas(); createParticles(); });
+        initCanvas(); createParticles(); loopParticles();
+
+        // --- Mouse Trailing Effect ---
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() < 0.15) { 
+                const sparkle = document.createElement('div');
+                sparkle.className = 'cursor-sparkle';
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                const colArray = ['#d4af37', '#ffffff', '#ff1493'];
+                sparkle.style.backgroundColor = colArray[Math.floor(Math.random() * colArray.length)];
+                document.body.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 700);
+            }
+        });
+
+        // --- Core Entry Gate Validation & Target Redirects ---
+        function validateGate() {
+            const inputField = document.getElementById('portal-password');
+            const errorElement = document.getElementById('error-msg');
+            const mainCard = document.getElementById('auth-card');
+            const overlayLoader = document.getElementById('loader');
+            const cleanPassword = inputField.value.trim().toLowerCase();
+
+            if (cleanPassword === "azeemkinoor") {
+                // Set authenticated local state
+                sessionStorage.setItem("accessGranted", "true");
+                
+                // Animate login card container away smoothly
+                mainCard.style.transition = "all 0.5s ease-in-out";
+                mainCard.style.opacity = "0";
+                mainCard.style.transform = "scale(0.95) translateY(-15px)";
+                
+                // Call processing overlay viewport safely
+                setTimeout(() => {
+                    overlayLoader.style.display = 'flex';
+                    setTimeout(() => { overlayLoader.style.opacity = '1'; }, 50);
+                }, 350);
+                
+                // Fire relocation command directly to custom destination dashboard
+                setTimeout(() => {
+                    document.body.style.transition = "opacity 0.6s ease";
+                    document.body.style.opacity = "0";
+                    setTimeout(() => {
+                        window.location.replace("welcome.html"); 
+                    }, 600);
+                }, 3500);
+
+            } else {
+                // Input evaluation rejected feedback loop
+                mainCard.classList.add('shake-error');
+                errorElement.innerText = "kon ho tum stranger😡";
+                errorElement.style.opacity = "1";
+                errorElement.style.height = "auto";
+                
+                setTimeout(() => { mainCard.classList.remove('shake-error'); }, 450);
+                inputField.select();
+                
+                inputField.addEventListener('input', () => {
+                    errorElement.style.opacity = "0";
+                    errorElement.style.height = "0px";
+                }, { once: true });
+            }
+        }
+
+        // Catch Return submission events natively
+        document.getElementById('portal-password').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') validateGate();
+        });
+    </script>
 </body>
-      </html>
-  
+</html>
