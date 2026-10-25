@@ -1,0 +1,1338 @@
+/* =========================================================
+   NOOR → AZEEM
+   Cute Online / Waiting Notification Page
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=Patrick+Hand&display=swap');
+
+:root {
+    --pink: #ff6fae;
+    --pink-dark: #ed4d91;
+    --pink-soft: #ffd6e8;
+    --rose: #ff9ec6;
+    --lavender: #c9b8ff;
+    --cream: #fffaf7;
+    --yellow: #ffe99a;
+    --mint: #c9f5df;
+    --text: #57384a;
+    --muted: #927386;
+    --white: rgba(255, 255, 255, 0.82);
+    --shadow: 0 25px 70px rgba(210, 92, 145, 0.20);
+}
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: "Baloo 2", sans-serif;
+    color: var(--text);
+
+    background:
+        radial-gradient(circle at 10% 15%, rgba(255, 205, 225, 0.9), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(210, 198, 255, 0.75), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(255, 235, 174, 0.6), transparent 35%),
+        linear-gradient(135deg, #fff8fb, #fdf5ff 45%, #fffdf4);
+
+    position: relative;
+}
+
+/* =========================================================
+   BACKGROUND GLOWS
+   ========================================================= */
+
+.background-glow {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(10px);
+    z-index: 0;
+    opacity: 0.55;
+}
+
+.glow-one {
+    width: 180px;
+    height: 180px;
+    background: rgba(255, 129, 181, 0.25);
+    top: 8%;
+    left: -60px;
+    animation: floatGlow 7s ease-in-out infinite;
+}
+
+.glow-two {
+    width: 220px;
+    height: 220px;
+    background: rgba(190, 168, 255, 0.25);
+    right: -70px;
+    top: 35%;
+    animation: floatGlow 9s ease-in-out infinite reverse;
+}
+
+.glow-three {
+    width: 170px;
+    height: 170px;
+    background: rgba(255, 220, 126, 0.2);
+    left: 40%;
+    bottom: -70px;
+    animation: floatGlow 8s ease-in-out infinite;
+}
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.page-container {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 45px 18px 35px;
+}
+
+/* =========================================================
+   DECORATIONS
+   ========================================================= */
+
+.floating-decoration {
+    position: fixed;
+    z-index: 1;
+    pointer-events: none;
+    font-size: 28px;
+    opacity: 0.75;
+    user-select: none;
+}
+
+.deco-one {
+    top: 13%;
+    left: 8%;
+    animation: floatOne 5s ease-in-out infinite;
+}
+
+.deco-two {
+    top: 22%;
+    right: 8%;
+    animation: floatTwo 6s ease-in-out infinite;
+}
+
+.deco-three {
+    bottom: 22%;
+    left: 9%;
+    animation: sparkleFloat 4s ease-in-out infinite;
+}
+
+.deco-four {
+    bottom: 15%;
+    right: 10%;
+    animation: floatOne 6s ease-in-out infinite reverse;
+}
+
+.deco-five {
+    top: 48%;
+    right: 3%;
+    font-size: 22px;
+    animation: floatTwo 5s ease-in-out infinite;
+}
+
+/* =========================================================
+   MAIN CARD
+   ========================================================= */
+
+.alarm-card {
+    position: relative;
+
+    width: min(620px, 100%);
+
+    padding: 38px 42px 34px;
+
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    border-radius: 36px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.88),
+            rgba(255, 245, 250, 0.82)
+        );
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        var(--shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+    text-align: center;
+
+    animation: cardAppear 0.8s cubic-bezier(.2,.8,.2,1);
+}
+
+/* little paper edge */
+
+.alarm-card::before {
+    content: "";
+    position: absolute;
+    inset: 9px;
+    border: 1px dashed rgba(237, 77, 145, 0.18);
+    border-radius: 29px;
+    pointer-events: none;
+}
+
+/* =========================================================
+   CORNER DECORATIONS
+   ========================================================= */
+
+.corner {
+    position: absolute;
+    font-size: 22px;
+    color: var(--pink);
+    opacity: 0.55;
+    z-index: 3;
+}
+
+.corner-top-left {
+    top: 17px;
+    left: 20px;
+}
+
+.corner-top-right {
+    top: 17px;
+    right: 20px;
+}
+
+.corner-bottom-left {
+    bottom: 17px;
+    left: 20px;
+}
+
+.corner-bottom-right {
+    bottom: 17px;
+    right: 20px;
+}
+
+/* =========================================================
+   TOP BADGE
+   ========================================================= */
+
+.top-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 8px 16px;
+
+    border-radius: 999px;
+
+    background: rgba(255, 215, 231, 0.65);
+    border: 1px solid rgba(255, 111, 174, 0.18);
+
+    color: var(--pink-dark);
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+
+    box-shadow: 0 8px 20px rgba(237, 77, 145, 0.08);
+}
+
+.top-badge span {
+    color: #ffb33e;
+}
+
+/* =========================================================
+   MAIL ICON
+   ========================================================= */
+
+.alarm-icon-wrapper {
+    position: relative;
+
+    width: 118px;
+    height: 118px;
+
+    margin: 27px auto 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alarm-icon {
+    position: relative;
+    z-index: 3;
+
+    width: 78px;
+    height: 78px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 39px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff,
+            #ffe5f0
+        );
+
+    border: 3px solid rgba(255, 255, 255, 0.9);
+
+    box-shadow:
+        0 15px 35px rgba(237, 77, 145, 0.20),
+        inset 0 2px 8px rgba(255, 255, 255, 0.9);
+
+    animation: iconHeartbeat 2.2s ease-in-out infinite;
+}
+
+.alarm-ring {
+    position: absolute;
+
+    border-radius: 50%;
+
+    border: 2px solid rgba(255, 111, 174, 0.25);
+
+    animation: ringPulse 2.5s ease-out infinite;
+}
+
+.ring-one {
+    width: 92px;
+    height: 92px;
+}
+
+.ring-two {
+    width: 116px;
+    height: 116px;
+    animation-delay: 0.8s;
+}
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.heading-area {
+    position: relative;
+    z-index: 2;
+}
+
+.mini-title {
+    color: var(--muted);
+
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
+
+    margin-bottom: 5px;
+}
+
+.heading-area h1 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(2.25rem, 6vw, 3.4rem);
+
+    line-height: 1.03;
+
+    font-weight: 400;
+
+    color: #4e3042;
+}
+
+.heading-area h1 span {
+    display: block;
+
+    color: var(--pink-dark);
+
+    font-style: italic;
+
+    text-shadow:
+        0 5px 18px rgba(237, 77, 145, 0.12);
+}
+
+.cute-script {
+    margin-top: 9px;
+
+    font-family: "Patrick Hand", cursive;
+
+    font-size: 24px;
+
+    color: #9a6380;
+
+    transform: rotate(-2deg);
+}
+
+/* =========================================================
+   MESSAGE BOX
+   ========================================================= */
+
+.message-box {
+    position: relative;
+    z-index: 2;
+
+    margin: 24px auto 20px;
+
+    max-width: 510px;
+
+    padding: 20px 22px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 240, 247, 0.9),
+            rgba(247, 241, 255, 0.9)
+        );
+
+    border: 1px solid rgba(255, 111, 174, 0.14);
+
+    box-shadow:
+        0 12px 30px rgba(148, 96, 128, 0.07);
+}
+
+.message-box p {
+    font-family: "Patrick Hand", cursive;
+
+    font-size: 20px;
+
+    line-height: 1.35;
+
+    color: #765268;
+}
+
+.message-highlight {
+    display: inline-block;
+
+    margin-top: 13px;
+
+    padding: 8px 13px;
+
+    border-radius: 12px;
+
+    background: rgba(255, 221, 235, 0.75);
+
+    color: var(--pink-dark);
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.cute-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    margin: 20px 0;
+}
+
+.cute-divider span {
+    color: var(--pink);
+
+    font-size: 14px;
+}
+
+.cute-divider i {
+    width: 50px;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(237, 77, 145, 0.3),
+            transparent
+        );
+}
+
+/* =========================================================
+   MAIN BUTTON
+   ========================================================= */
+
+.wake-button {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 72px;
+
+    border: none;
+    border-radius: 22px;
+
+    padding: 0 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    cursor: pointer;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff76b2,
+            #ed4d91 55%,
+            #d94183
+        );
+
+    box-shadow:
+        0 14px 30px rgba(237, 77, 145, 0.27),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease;
+}
+
+.wake-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 20px 38px rgba(237, 77, 145, 0.34),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.wake-button:active {
+    transform: scale(0.97);
+}
+
+.wake-button.is-sending {
+    pointer-events: none;
+}
+
+.button-glow {
+    position: absolute;
+
+    top: -60%;
+    left: -30%;
+
+    width: 55%;
+    height: 220%;
+
+    background: rgba(255, 255, 255, 0.24);
+
+    transform: rotate(20deg);
+
+    animation: buttonShine 3.5s linear infinite;
+}
+
+.button-icon {
+    position: relative;
+    z-index: 2;
+
+    font-size: 24px;
+}
+
+.button-text {
+    position: relative;
+    z-index: 2;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    letter-spacing: 1.1px;
+}
+
+.button-arrow {
+    position: relative;
+    z-index: 2;
+
+    font-size: 14px;
+
+    color: #ffe5f0;
+}
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status-box {
+    min-height: 0;
+
+    margin-top: 14px;
+
+    border-radius: 16px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.status-box:not(:empty) {
+    padding: 12px 15px;
+
+    background: rgba(255, 239, 246, 0.9);
+
+    border: 1px solid rgba(237, 77, 145, 0.12);
+
+    animation: statusAppear 0.4s ease;
+}
+
+/* =========================================================
+   MINI INFO
+   ========================================================= */
+
+.mini-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-top: 20px;
+}
+
+.mini-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    text-align: left;
+
+    padding: 12px;
+
+    border-radius: 17px;
+
+    background: rgba(255, 255, 255, 0.62);
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.mini-info-icon {
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #fff0f6;
+
+    font-size: 18px;
+}
+
+.mini-info strong {
+    display: block;
+
+    font-size: 13px;
+
+    color: #684054;
+}
+
+.mini-info small {
+    display: block;
+
+    margin-top: 1px;
+
+    font-size: 11px;
+
+    color: #a18192;
+}
+
+/* =========================================================
+   CUTE NOTE
+   ========================================================= */
+
+.cute-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+
+    margin-top: 21px;
+
+    padding: 14px 12px;
+
+    border-radius: 17px;
+
+    background: rgba(255, 247, 203, 0.48);
+
+    border: 1px dashed rgba(220, 176, 54, 0.25);
+}
+
+.cute-note span {
+    font-size: 21px;
+}
+
+.cute-note p {
+    font-family: "Patrick Hand", cursive;
+
+    color: #80634a;
+
+    font-size: 17px;
+
+    line-height: 1.2;
+}
+
+.cute-note strong {
+    color: var(--pink-dark);
+}
+
+/* =========================================================
+   SIGNATURE
+   ========================================================= */
+
+.signature {
+    margin-top: 19px;
+
+    font-family: "Patrick Hand", cursive;
+
+    font-size: 21px;
+
+    color: #a36684;
+
+    transform: rotate(-2deg);
+}
+
+/* =========================================================
+   BOTTOM CAPTION
+   ========================================================= */
+
+.bottom-caption {
+    margin-top: 22px;
+
+    font-family: "Patrick Hand", cursive;
+
+    font-size: 18px;
+
+    color: #9a7890;
+
+    text-align: center;
+
+    opacity: 0.9;
+}
+
+/* =========================================================
+   ACCESS SCREEN
+   ========================================================= */
+
+.access-screen {
+    position: fixed;
+    inset: 0;
+
+    z-index: 100;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 22px;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(255, 214, 232, 0.9),
+            transparent 35%
+        ),
+        #fff8fc;
+
+    text-align: center;
+}
+
+.access-screen.show {
+    display: flex;
+}
+
+.access-box {
+    width: min(420px, 100%);
+
+    padding: 34px 25px;
+
+    border-radius: 28px;
+
+    background: rgba(255, 255, 255, 0.88);
+
+    border: 2px solid rgba(255, 111, 174, 0.14);
+
+    box-shadow: var(--shadow);
+}
+
+.access-icon {
+    font-size: 42px;
+
+    margin-bottom: 10px;
+}
+
+.access-box h2 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 32px;
+
+    color: var(--pink-dark);
+}
+
+.access-box p {
+    margin-top: 9px;
+
+    color: var(--text);
+
+    line-height: 1.5;
+}
+
+.access-box span {
+    display: block;
+
+    margin-top: 13px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+/* =========================================================
+   CLICK PARTICLES
+   ========================================================= */
+
+.click-particle {
+    position: fixed;
+
+    z-index: 999;
+
+    pointer-events: none;
+
+    font-size: 18px;
+
+    animation: particlePop 0.9s ease-out forwards;
+}
+
+/* =========================================================
+   SPARKLES
+   ========================================================= */
+
+.sparkle {
+    position: fixed;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    color: white;
+
+    text-shadow:
+        0 0 8px rgba(255, 111, 174, 0.8);
+
+    animation: sparklePop 1.4s ease-out forwards;
+}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(28px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes iconHeartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    8% {
+        transform: scale(1.08);
+    }
+
+    16% {
+        transform: scale(0.98);
+    }
+
+    24% {
+        transform: scale(1.06);
+    }
+
+    32% {
+        transform: scale(1);
+    }
+}
+
+@keyframes ringPulse {
+    0% {
+        opacity: 0.7;
+        transform: scale(0.75);
+    }
+
+    80% {
+        opacity: 0;
+        transform: scale(1.15);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.15);
+    }
+}
+
+@keyframes buttonShine {
+    0% {
+        left: -55%;
+    }
+
+    100% {
+        left: 130%;
+    }
+}
+
+@keyframes statusAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatGlow {
+    0%, 100% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform: translate3d(15px, -20px, 0);
+    }
+}
+
+@keyframes floatOne {
+    0%, 100% {
+        transform: translateY(0) rotate(-4deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+}
+
+@keyframes floatTwo {
+    0%, 100% {
+        transform: translateY(0) rotate(4deg);
+    }
+
+    50% {
+        transform: translateY(13px) rotate(-5deg);
+    }
+}
+
+@keyframes sparkleFloat {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translateY(-10px) scale(1.15);
+        opacity: 1;
+    }
+}
+
+@keyframes particlePop {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.6);
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translate(
+                calc(-50% + var(--move-x)),
+                calc(-50% + var(--move-y))
+            )
+            scale(1.35)
+            rotate(20deg);
+    }
+}
+
+@keyframes sparklePop {
+    0% {
+        opacity: 0;
+        transform: scale(0.4) rotate(0deg);
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.5) rotate(80deg);
+    }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .page-container {
+        padding: 25px 13px 25px;
+    }
+
+    .alarm-card {
+        padding: 31px 20px 27px;
+
+        border-radius: 29px;
+    }
+
+    .alarm-card::before {
+        inset: 7px;
+        border-radius: 23px;
+    }
+
+    .floating-decoration {
+        font-size: 22px;
+    }
+
+    .deco-one {
+        left: 3%;
+    }
+
+    .deco-two {
+        right: 3%;
+    }
+
+    .deco-three {
+        left: 4%;
+    }
+
+    .deco-four {
+        right: 4%;
+    }
+
+    .heading-area h1 {
+        font-size: clamp(2.05rem, 10vw, 2.8rem);
+    }
+
+    .message-box {
+        padding: 17px 14px;
+    }
+
+    .message-box p {
+        font-size: 18px;
+    }
+
+    .message-highlight {
+        font-size: 13px;
+    }
+
+    .wake-button {
+        min-height: 67px;
+        padding: 0 15px;
+    }
+
+    .button-text {
+        font-size: 13px;
+        letter-spacing: 0.7px;
+    }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    body {
+        min-height: 100svh;
+    }
+
+    .page-container {
+        min-height: 100svh;
+
+        padding:
+            18px
+            10px
+            22px;
+    }
+
+    .alarm-card {
+        width: 100%;
+
+        padding:
+            27px
+            14px
+            23px;
+
+        border-radius: 26px;
+    }
+
+    .corner {
+        font-size: 18px;
+    }
+
+    .corner-top-left {
+        top: 13px;
+        left: 14px;
+    }
+
+    .corner-top-right {
+        top: 13px;
+        right: 14px;
+    }
+
+    .corner-bottom-left {
+        bottom: 13px;
+        left: 14px;
+    }
+
+    .corner-bottom-right {
+        bottom: 13px;
+        right: 14px;
+    }
+
+    .top-badge {
+        max-width: 90%;
+
+        padding: 7px 11px;
+
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+
+    .alarm-icon-wrapper {
+        width: 105px;
+        height: 105px;
+
+        margin-top: 22px;
+    }
+
+    .alarm-icon {
+        width: 70px;
+        height: 70px;
+
+        font-size: 34px;
+    }
+
+    .ring-one {
+        width: 84px;
+        height: 84px;
+    }
+
+    .ring-two {
+        width: 104px;
+        height: 104px;
+    }
+
+    .mini-title {
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+
+    .heading-area h1 {
+        font-size: 2.25rem;
+    }
+
+    .cute-script {
+        font-size: 22px;
+    }
+
+    .message-box {
+        margin-top: 20px;
+        padding: 16px 11px;
+    }
+
+    .message-box p {
+        font-size: 17px;
+    }
+
+    .message-highlight {
+        padding: 7px 10px;
+
+        font-size: 12px;
+    }
+
+    .cute-divider {
+        margin: 17px 0;
+    }
+
+    .cute-divider i {
+        width: 35px;
+    }
+
+    .wake-button {
+        min-height: 64px;
+
+        border-radius: 19px;
+
+        gap: 8px;
+    }
+
+    .button-icon {
+        font-size: 21px;
+    }
+
+    .button-text {
+        font-size: 11px;
+        letter-spacing: 0.4px;
+    }
+
+    .button-arrow {
+        font-size: 11px;
+    }
+
+    .mini-info-grid {
+        gap: 8px;
+        margin-top: 16px;
+    }
+
+    .mini-info {
+        padding: 9px;
+
+        gap: 7px;
+
+        border-radius: 14px;
+    }
+
+    .mini-info-icon {
+        width: 32px;
+        height: 32px;
+
+        flex-basis: 32px;
+
+        font-size: 15px;
+    }
+
+    .mini-info strong {
+        font-size: 11px;
+    }
+
+    .mini-info small {
+        font-size: 9px;
+    }
+
+    .cute-note {
+        gap: 7px;
+
+        margin-top: 16px;
+
+        padding: 11px 7px;
+    }
+
+    .cute-note span {
+        font-size: 17px;
+    }
+
+    .cute-note p {
+        font-size: 15px;
+    }
+
+    .signature {
+        font-size: 19px;
+        margin-top: 15px;
+    }
+
+    .bottom-caption {
+        margin-top: 14px;
+        font-size: 15px;
+    }
+
+    /* Keep mobile light and smooth */
+    .background-glow {
+        filter: blur(20px);
+    }
+
+    .floating-decoration {
+        opacity: 0.5;
+    }
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .page-container {
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    .alarm-card {
+        padding-left: 11px;
+        padding-right: 11px;
+    }
+
+    .heading-area h1 {
+        font-size: 2rem;
+    }
+
+    .button-text {
+        font-size: 10px;
+    }
+
+    .mini-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* =========================================================
+   SAFE AREA FOR MOBILE DEVICES
+   ========================================================= */
+
+@supports (padding: env(safe-area-inset-bottom)) {
+
+    .page-container {
+        padding-bottom:
+            calc(25px + env(safe-area-inset-bottom));
+    }
+}
